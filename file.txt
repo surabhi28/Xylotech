@@ -1,26 +1,31 @@
-4
-fileone.txt
+5
+fone.txt
 contant of file one
 hey$
-how 
+how are you?
 
 
 
-filetwo.txt
-content of file 
+ftwo.txt
+conten$t of file two
 
-hello world
-
-
+hello world$$
 
 
-filethree.txt 
-conten$t of file  three
+
+fthree.txt 
+content of file$$  three
 
 okay
 
 
 
-filefour.txt 
-conte4nt of file  four
+ffour.txt 
+content of file  four
+
+
+
+fFive
+content of file  fives
+
 
