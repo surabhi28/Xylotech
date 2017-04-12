@@ -8,68 +8,56 @@ $(document).ready(function(){
 
 var fileName='';
 var fileContent='';
-    function xx(){
+    function readInputFile(){
     	$.get("file.txt", function(data){
-    	
     	var numF;
-    	var ff =data.split(/\n\s*\n\s*\n/);
-    	var ss = ff[0].split(/\n/);
-    	numF = Number(ss[0]);
-    	//alert(numF);
-    	var flag=0,j=0;
-  
-        //if(flag===0){
+    	var content =data.split(/\n\s*\n\s*\n/);
+    	var lineContent = content[0].split(/\n/);
+    	numF = Number(lineContent[0]);
     	
-
-    			 var fn= ss[1].split("."); 
+    	var j=0;
+  
+        var fn= lineContent[1].split("."); 
 	        	fileName = fn[0];
-	        	//alert(fileName);
-	        	var fileextenion = fn[1];
-	        	//alert(fileextenion);
-	        	for (var l=2;l<ss.length;l++)
-	        		{fileContent +=ss[l];
-	        	//flag=1;
-	            }
-	        	//alert(fileContent);
-	        	j=1;
-    		
-    		while(j<numF){
-    			//var fn= ss[j].split("."); 
-	        	//fileName += fn[0];
-	        	//alert(fileName);
 	        	
+	        	var fileextenion = fn[1];
 	        
-
-
-	         ss = ff[j].split(/\n/);
-	         //alert(ff[j]);
-	         fileName+=ss[0].split(".")[0];
-
-
-	       
-	        	for(var x=1; x<ss.length;x++){
-	        		fileContent=fileContent+ss[x];
+	        	for (var l=2;l<lineContent.length;l++)
+	        		{fileContent +=lineContent[l];
 	        	}
 
-	     
-    				j++;
+        function camelize(str) {
+                  return str.replace(/\W+(.)/g, function(match, chr)
+               {
+            return chr.toUpperCase();
+        });
+    }
+	        	
+
+
+    j=1;
+
+
+    		
+    while(j<numF){
+    			
+	       lineContent = content[j].split(/\n/);
+	         
+	       fileName = fileName+ " " +lineContent[0].split(".")[0];
+            for(var x=1; x<lineContent.length;x++){
+	        		fileContent=fileContent+lineContent[x];
+	        	}
+                j++;
     		}
 
 
-//fileContent = fileContent.replace('$','*');
+
 fileContent =fileContent.replace(/\$/g, "");
 fileContent =fileContent.replace(/(?:(?:\r\n|\r|\n)\s*){2}/gm, "");
-//fileContent =fileContent.replace(/\n\s*\n/, '');
-/*var temp='';
-ff =fileContent.split('\n');
-alert(ff.length);
- for(var k=0;k<ff.length;k++){
-temp+=ff[k]
- }
-fileContent = temp;*/
 
+             fileName=camelize(fileName);
     		fileName =fileName+"."+fileextenion;
-    		//alert("\n"+fileContent+" filename="+fileName);
+    		
     		   var x =fileName;
    var textToWrite =fileContent;
 
@@ -97,60 +85,26 @@ fileContent = temp;*/
 
     downloadLink.click();
 
-
-
-
-
-
-
-
-    		//alert(ff[j]);
     		
-    	
-    	//alert(fileContent);
     	});
     };
-/*    
-	function abc(){
-		$.get("file.txt", function(data){
-    		var lines = data.split('\n');
-    		var n = lines.length;
-    		var numF = Number(lines[0]);
-//alert(lines[1]);
-   	var fn= "abc.txt".split("."); 
-        	fileName = fn[0];
-        	var fileextenion = fn[1];
-        	alert(fileextenion);
-        	fileContent = 
 
 
+$("button").click(function(){
 
+    readInputFile();
 
-
-    	
-            for(var i=1;i<n;i++){
-            	lines[i]
-
-
-            }
-
-        });
-	}*/
-
-    $("button").click(function(){
-
-        
- xx();
-
+   });
 });
-});
+
+
 </script>
 </head>
 <body>
 
-<div id="div1"><h2>here is the content of your file</h2></div>
+<div id="div1"><h2>you can download the output by clicking on the below button</h2></div>
 
-<button>click</button>
+<button>Download</button>
 
 </body>
 </html>
